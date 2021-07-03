@@ -1,4 +1,4 @@
-# f = open("New-ways-to-get-started-with-Azure-Database-for-PostgreSQL_en.vtt", "r")
+#!/usr/bin/python
 vttfileName = 'New-ways-to-get-started-with-Azure-Database-for-PostgreSQL_en.vtt'
 textfileName = 'New-ways-to-get-started-with-Azure-Database-for-PostgreSQL_en.txt'
 newlines = []
@@ -14,7 +14,7 @@ with open(textfileName, 'w') as newfile:
     tmpline = ''
     for newline in newlines:
         if not(newline.endswith('.')):
-            tmpline = tmpline + newline
+            tmpline = tmpline +' '+ newline
         else:
             tmpline = tmpline + newline + '\r\n'
             newfile.write(tmpline)
