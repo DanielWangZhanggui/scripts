@@ -14,8 +14,8 @@ with open(textfileName, 'w') as newfile:
     tmpline = ''
     for newline in newlines:
         if not(newline.endswith('.')):
-            tmpline = tmpline +' '+ newline
+            tmpline = tmpline + ' ' + newline
         else:
-            tmpline = tmpline + newline + '\r\n'
+            tmpline = tmpline + ' ' + newline + '\r\n'
             newfile.write(tmpline)
             tmpline = ''
