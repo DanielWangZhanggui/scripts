@@ -1,0 +1,20 @@
+input {
+    file {
+        path => "/root/mycontainer/resourceId=/SUBSCRIPTIONS/77BBB887-5DAA-4B0B-ACF6-46F07353C2CF/RESOURCEGROUPS/SPRINGCLOUD/PROVIDERS/MICROSOFT.APPPLATFORM/SPRING/DANIELSPRINGCLOUD/**/*.json"
+        start_position => "beginning"
+        codec => "json"
+    }
+}
+filter {
+  mutate { 
+    add_field =>  { "pro_value" => "%{properties}"}
+}
+  json {
+    source => "pro_value"
+    remove_field => ["pro_value", "properties", "time", "path", "logtag", "operationName", "LogFormat", "resourceId", "category", "host", "location", "Stream", "level", "ServiceName","ServiceId"]
+}
+
+}
+output {
+  stdout {}
+}

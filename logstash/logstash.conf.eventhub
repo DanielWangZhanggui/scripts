@@ -1,0 +1,32 @@
+input {
+   azure_event_hubs  {
+        event_hub_connections => ["Endpoint=sb://springlcloudtestaaa.servicebus.windows.net/;SharedAccessKeyName=test;SharedAccessKey=ueKKcnDuSbDMJpGRbDyYOg3fnPhpMiEqkVA9QYK6rDo=;EntityPath=aaa"]
+        threads => 8
+      decorate_events => true
+    }
+}
+filter {
+  json {
+   source => "message"
+}
+  split { 
+    field => "records"
+}
+   mutate {
+     add_field =>  { "pro_value" => "%{[records][properties]}"}
+     remove_field => ["@timestamp","@version","message","records","logtag","category","operationName"]
+    }
+json {
+    source => "pro_value"
+    remove_field => ["pro_value", "logtag", "operationName", "LogFormat", "resourceId", "category", "host"]
+}
+grok {
+  match => ["Log", "%{TIMESTAMP_ISO8601:timestamp} ?%{GREEDYDATA:message}"]
+  add_field => {
+      "TimestampGenerated" => "%{timestamp}"
+    }
+}
+}
+output {
+  stdout {}
+}
