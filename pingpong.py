@@ -16,7 +16,7 @@ class CsClient:
         self._rest_port = os.getenv("CS_REST_PORT")
         self.rest_timeout = 3
         self.podHost = os.getenv("HOSTNAME")
-        self.podName = os.getenv("PODNAME")
+        self.podName = os.getenv("POD_NAME")
         # self.node_IP = os.getenv("NODEIP")
         self._cs_status_url = "http://%s.%s.svc.cluster.local:%s/v2/cs_cluster_status" % (self._service_name, self._namespace, self._rest_port)
         self.master_url = self.get_master_url()
@@ -63,7 +63,7 @@ def check_ready_by_cs():
 
 def check_ready():
     try:
-        podName = os.getenv("podName")
+        podName = os.getenv("POD_NAME")
         port = os.getenv("HA_PORT")
         adminpass = os.getenv("ADMIN_PASSWORD")
         # nodeIp = os.getenv("NODEIP")
@@ -88,7 +88,7 @@ def check_ready():
         return -1
 if __name__ == "__main__":
     ###改这个变量
-    podName = os.getenv("PODNAME")
+    podName = os.getenv("POD_NAME")
     
     while True:
         startTime=dt.now()
