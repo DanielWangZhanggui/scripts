@@ -95,5 +95,5 @@ if __name__ == "__main__":
         print("Start time: %s\t%s\t" % (startTime.strftime("%d/%m/%Y %H:%M:%S"), podName))
         ret_code=check_ready()
         endTime=dt.now()
-        print("End Time:%s\t%s, Return Code=%s, Delta time: %s ms" % (endTime.strftime("%d/%m/%Y %H:%M:%S"), podName,ret_code,(endTime-startTime).microseconds / 1000))
+        print("End Time:%s\t%s, Return Code=%s, Delta time: %s s %s ms" % (endTime.strftime("%d/%m/%Y %H:%M:%S"), podName,ret_code,(endTime-startTime).seconds / 1000),(endTime-startTime).microseconds / 1000))
         time.sleep(3)
